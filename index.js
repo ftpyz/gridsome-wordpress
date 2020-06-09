@@ -280,7 +280,7 @@ class WordPressSource {
     }
 
     if (isPlainObject(value)) {
-      if(value.type && (value.type==="relationship")){
+      if(value.type && (value.type==="relationship" && Array.isArray(value.value))){
         
         const typeName = this.createTypeName(value.post_type)
         for(const r of value.value){
