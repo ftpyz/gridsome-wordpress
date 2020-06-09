@@ -149,9 +149,9 @@ class WordPressSource {
           if (post.hasOwnProperty(propName)) {
             const typeName = this.createTypeName(type)
             const key = camelCase(propName)
-
+            
             fields[key] = Array.isArray(post[propName])
-              ? post[propName].map(id => createReference(typeName, id))
+              ? post[propName]["type"]==="relationship" ? post[propName]["value"].map(id => createReference(typeName, id)) : post[propName].map(id => createReference(typeName, id))
               : createReference(typeName, post[propName])
           }
         }
@@ -280,7 +280,14 @@ class WordPressSource {
     }
 
     if (isPlainObject(value)) {
-      if (value.post_type && (value.ID || value.id)) {
+      if(value.type && (value.type==="relationship")){
+        
+        const typeName = this.createTypeName(value.post_type)
+        for(const r of value.value){
+            return this.store.createReference(typeName, r)
+        }
+      }
+      else if (value.post_type && (value.ID || value.id)) {
         const typeName = this.createTypeName(value.post_type)
         const id = value.ID || value.id
 
