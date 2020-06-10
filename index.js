@@ -283,9 +283,9 @@ class WordPressSource {
       if(value.type && (value.type==="relationship" && Array.isArray(value.value))){
         
         const typeName = this.createTypeName(value.post_type)
-        for(const r of value.value){
-            return this.store.createReference(typeName, r)
-        }
+        return value.value.map(r=>{
+          return this.store.createReference(typeName, r)
+        })
       }
       else if (value.post_type && (value.ID || value.id)) {
         const typeName = this.createTypeName(value.post_type)
