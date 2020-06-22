@@ -4,8 +4,8 @@
 API might change before v1 is released.
 
 ## Install
-- `yarn add @gridsome/source-wordpress`
-- `npm install @gridsome/source-wordpress`
+- `yarn add https://github.com/ftpyz/gridsome-wordpress`
+- `npm install https://github.com/ftpyz/gridsome-wordpress`
 
 ## Usage
 
